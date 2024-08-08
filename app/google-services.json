@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "838200347840",
+    "project_id": "videoappp-e1e2b",
+    "storage_bucket": "videoappp-e1e2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838200347840:android:b960b3aad7ef931552b125",
+        "android_client_info": {
+          "package_name": "com.example.ozan.videoappp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJGzcFxKAuaGbfzrYowPeZTWn5SLpBovI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
