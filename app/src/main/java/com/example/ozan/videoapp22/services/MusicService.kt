@@ -21,7 +21,6 @@ class MusicService : Service() {
         const val NOTIFICATION_ID = 1
         const val ACTION_PLAY_MUSIC = "com.example.ozan.videoapp22.ACTION_PLAY_MUSIC"
         const val ACTION_PAUSE_MUSIC = "com.example.ozan.videoapp22.ACTION_PAUSE_MUSIC"
-        const val ACTION_UPDATE_SEEKBAR = "com.example.ozan.videoapp22.ACTION_UPDATE_SEEKBAR"
         const val ACTION_SEEKBAR_UPDATE = "com.example.ozan.videoapp22.ACTION_SEEKBAR_UPDATE"
     }
 
