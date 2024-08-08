@@ -13,10 +13,6 @@ object ExoPlayerSingleton {
         }
     }
 
-    fun getInstance(): ExoPlayer {
-        return player ?: throw IllegalStateException("ExoPlayerSingleton is not initialized.")
-    }
-
     fun releasePlayer() {
         player?.release()
         player = null
