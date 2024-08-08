@@ -14,8 +14,11 @@ import androidx.media.app.NotificationCompat.MediaStyle
 import com.example.ozan.videoapp22.NotificationChannel.MediaPlayerSingleton
 import com.example.ozan.videoapp22.NotificationChannel.NotificationReceiver
 import com.example.ozan.videoapp22.R
+import com.example.ozan.videoapp22.pages.MusicActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MusicService : Service() {
+
 
     companion object {
         const val NOTIFICATION_ID = 1
@@ -81,6 +84,7 @@ class MusicService : Service() {
     private fun buildNotification(): Notification {
         val playIntent = Intent(this, NotificationReceiver::class.java).apply {
             action = NotificationReceiver.ACTION_PLAY_MUSIC
+
         }
         val playPendingIntent = PendingIntent.getBroadcast(this, 0, playIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 

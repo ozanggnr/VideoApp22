@@ -15,6 +15,7 @@ import com.example.ozan.videoapp22.NotificationChannel.ExoPlayerSingleton
 import com.example.ozan.videoapp22.NotificationChannel.NotificationReceiver
 import com.example.ozan.videoapp22.R
 import com.example.ozan.videoapp22.services.VideoService
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.StyledPlayerView
@@ -26,7 +27,7 @@ class VideoActivity : AppCompatActivity() {
     private lateinit var playPauseButton: FloatingActionButton
     private lateinit var playerView: StyledPlayerView
     private val handler = Handler(Looper.getMainLooper())
-
+    lateinit var player: ExoPlayer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.video_page)
@@ -56,13 +57,15 @@ class VideoActivity : AppCompatActivity() {
             togglePlayPause()
         }
 
+
         setupSeekBar()
     }
 
     private fun initializePlayer() {
-        val player = ExoPlayerSingleton.getPlayer(this)
+        player = ExoPlayerSingleton.getPlayer(this)
         playerView.player = player
-        val mediaItem = MediaItem.fromUri("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")
+        val mediaItem =
+            MediaItem.fromUri("https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4")
         player.setMediaItem(mediaItem)
         player.prepare()
         player.playWhenReady = true
@@ -74,27 +77,51 @@ class VideoActivity : AppCompatActivity() {
                     seekBar.max = player.duration.toInt()
                 }
             }
-        })
-    }
 
-    private fun togglePlayPause() {
-        val player = ExoPlayerSingleton.getPlayer(this)
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                super.onIsPlayingChanged(isPlaying)
+                if (isPlaying) {
+                    playPauseButton.setImageResource(com.google.android.exoplayer2.R.drawable.exo_icon_pause)
+                } else {
+                    playPauseButton.setImageResource(com.google.android.exoplayer2.R.drawable.exo_icon_play)
+
+                }
+            }
+        })
+
         val intent = Intent(this, VideoService::class.java).apply {
             action = if (player.isPlaying) {
                 NotificationReceiver.ACTION_PAUSE_VIDEO
+
             } else {
                 NotificationReceiver.ACTION_PLAY_VIDEO
             }
         }
         ContextCompat.startForegroundService(this, intent)
+    }
 
-        if (player.isPlaying) {
+    private fun togglePlayPause() {
+        if(player.isPlaying){
+            player.pause()
+        }
+        else player.play()
+        /*val intent = Intent(this, VideoService::class.java).apply {
+            action = if (player.isPlaying) {
+                NotificationReceiver.ACTION_PAUSE_VIDEO
+
+            } else {
+                NotificationReceiver.ACTION_PLAY_VIDEO
+            }
+        }*/
+
+
+        /*if (player.isPlaying) {
             playPauseButton.setImageResource(com.google.android.exoplayer2.R.drawable.exo_icon_play)
             player.pause()
         } else {
             playPauseButton.setImageResource(com.google.android.exoplayer2.R.drawable.exo_icon_pause)
             player.play()
-        }
+        }*/
     }
 
     private fun setupSeekBar() {
