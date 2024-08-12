@@ -13,6 +13,10 @@ object ExoPlayerSingleton {
         }
     }
 
+    fun getInstance():ExoPlayer{
+        return player?:throw IllegalStateException("MediaPlayerSingleton is not initialized.")
+    }
+
     fun releasePlayer() {
         player?.release()
         player = null

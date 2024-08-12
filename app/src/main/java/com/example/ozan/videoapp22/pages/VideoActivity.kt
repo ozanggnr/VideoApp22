@@ -1,15 +1,11 @@
 package com.example.ozan.videoapp22.pages
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.ozan.videoapp22.NotificationChannel.ExoPlayerSingleton
 import com.example.ozan.videoapp22.NotificationChannel.NotificationReceiver
@@ -32,19 +28,7 @@ class VideoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.video_page)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                    1
-                )
-            }
-        }
+
         NotificationReceiver.createNotificationChannels(this)
 
         playerView = findViewById(R.id.videoscreen)
@@ -101,10 +85,9 @@ class VideoActivity : AppCompatActivity() {
     }
 
     private fun togglePlayPause() {
-        if(player.isPlaying){
+        if (player.isPlaying) {
             player.pause()
-        }
-        else player.play()
+        } else player.play()
         /*val intent = Intent(this, VideoService::class.java).apply {
             action = if (player.isPlaying) {
                 NotificationReceiver.ACTION_PAUSE_VIDEO

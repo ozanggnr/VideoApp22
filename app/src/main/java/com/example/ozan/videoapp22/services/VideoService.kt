@@ -10,7 +10,6 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.media.app.NotificationCompat.MediaStyle
 import com.example.ozan.videoapp22.NotificationChannel.ExoPlayerSingleton
-import com.example.ozan.videoapp22.NotificationChannel.MediaPlayerSingleton
 import com.example.ozan.videoapp22.NotificationChannel.NotificationReceiver
 import com.example.ozan.videoapp22.R
 import com.google.android.exoplayer2.ExoPlayer
@@ -62,15 +61,26 @@ class VideoService : Service() {
         val playIntent = Intent(this, NotificationReceiver::class.java).apply {
             action = NotificationReceiver.ACTION_PLAY_VIDEO
         }
-        val playPendingIntent = PendingIntent.getBroadcast(this, 0, playIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val playPendingIntent = PendingIntent.getBroadcast(
+            this,
+            0,
+            playIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
         val pauseIntent = Intent(this, NotificationReceiver::class.java).apply {
             action = NotificationReceiver.ACTION_PAUSE_VIDEO
         }
-        val pausePendingIntent = PendingIntent.getBroadcast(this, 1, pauseIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val pausePendingIntent = PendingIntent.getBroadcast(
+            this,
+            1,
+            pauseIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
 
         val isPlaying = player.isPlaying
-        val actionIcon = if (isPlaying) android.R.drawable.ic_media_pause else android.R.drawable.ic_media_play
+        val actionIcon =
+            if (isPlaying) android.R.drawable.ic_media_pause else android.R.drawable.ic_media_play
         val actionIntent = if (isPlaying) pausePendingIntent else playPendingIntent
 
         return NotificationCompat.Builder(this, NotificationReceiver.VIDEO_CHANNEL_ID)
@@ -84,7 +94,8 @@ class VideoService : Service() {
     }
 
     private fun updateNotification() {
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(NOTIFICATION_ID, buildNotification())
     }
 }
