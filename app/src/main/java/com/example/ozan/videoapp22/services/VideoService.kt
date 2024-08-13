@@ -76,6 +76,10 @@ class VideoService : Service() {
         super.onDestroy()
         ExoPlayerSingleton.releasePlayer()
         stopSelf()
+      //  player.playWhenReady=false
+       // player.clearMediaItems()
+        val stopIntent = Intent(this, VideoService::class.java)
+        stopService(stopIntent)
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(MusicService.NOTIFICATION_ID)

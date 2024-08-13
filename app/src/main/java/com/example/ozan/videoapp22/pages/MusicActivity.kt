@@ -90,14 +90,24 @@ class MusicActivity : AppCompatActivity() {
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
+    override fun onStop() {
+        super.onStop()
+        if (isBound) {
+            unbindService(serviceConnection)
+            isBound = false
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         if (isBound) {
             unbindService(serviceConnection)
             isBound = false
         }
+        stopService(Intent(this, MusicService::class.java))
         ExoPlayerSingleton.releasePlayer()
         handler.removeCallbacksAndMessages(null)
     }
+
 
 }
