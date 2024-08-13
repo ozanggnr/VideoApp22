@@ -7,8 +7,12 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Binder
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
+import android.widget.SeekBar
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import androidx.media.app.NotificationCompat.MediaStyle
 import com.example.ozan.videoapp22.NotificationChannel.ExoPlayerSingleton
@@ -22,16 +26,18 @@ class MusicService : Service() {
 
     private lateinit var player: ExoPlayer
     private val binder = LocalBinder()
+    private val handler = Handler(Looper.getMainLooper())
 
     inner class LocalBinder : Binder() {
         fun getService(): MusicService = this@MusicService
     }
+
     override fun onBind(intent: Intent?): IBinder? {
         return binder
     }
 
-    fun getPlayer():ExoPlayer{
-return player
+    fun getPlayer(): ExoPlayer {
+        return player
     }
 
     companion object {
@@ -41,6 +47,8 @@ return player
 
     override fun onCreate() {
         super.onCreate()
+
+        //stopVideoService()
         player = ExoPlayerSingleton.getPlayer(this)
         NotificationReceiver.createNotificationChannels(this)
         startForeground(NOTIFICATION_ID, buildNotification())
@@ -50,14 +58,54 @@ return player
         when (intent?.action) {
             NotificationReceiver.ACTION_PLAY_MUSIC -> play()
             NotificationReceiver.ACTION_PAUSE_MUSIC -> pause()
+            else -> initializePlayer()
         }
         updateNotification()
         return START_STICKY
     }
 
+
+    private fun stopVideoService() {
+        val stopIntent = Intent(this, VideoService::class.java)
+        stopService(stopIntent)
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(VideoService.NOTIFICATION_ID)
+    }
+
+
+    fun setupSeekBar(seekBar: SeekBar) {
+        val updateSeekBar = object : Runnable {
+            override fun run() {
+                if (player.isPlaying) {
+                    seekBar.progress = player.currentPosition.toInt()
+                }
+                handler.postDelayed(this, 1000)
+            }
+        }
+        handler.post(updateSeekBar)
+
+        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    player.seekTo(progress.toLong())
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         ExoPlayerSingleton.releasePlayer()
+        stopSelf()
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(NOTIFICATION_ID)
+        ServiceCompat.stopForeground(this,ServiceCompat.STOP_FOREGROUND_REMOVE)
     }
 
 
@@ -77,7 +125,7 @@ return player
         return player.isPlaying
     }
 
-     fun initializePlayer(){
+    fun initializePlayer() {
         player = ExoPlayerSingleton.getPlayer(this)
         val rawUri = RawResourceDataSource.buildRawResourceUri(R.raw.nirnir)
         val mediaItem = MediaItem.fromUri(rawUri)

@@ -30,7 +30,7 @@ class VideoActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
     lateinit var player: ExoPlayer
     private var isBound = false
-    private var VideoS:VideoService?=null
+    private var VideoS: VideoService? = null
     private val serviceConnection = object : ServiceConnection {
 
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -38,12 +38,16 @@ class VideoActivity : AppCompatActivity() {
             VideoS = binder.getService()
             player = VideoS?.getPlayer() ?: return
 
+            playerView.player = player
+            VideoS?.setupSeekBar(seekBar)
+
             player.addListener(object : Player.Listener {
                 override fun onPlaybackStateChanged(playbackState: Int) {
                     if (playbackState == Player.STATE_READY) {
                         seekBar.max = player.duration.toInt()
                     }
                 }
+
                 override fun onIsPlayingChanged(isPlaying: Boolean) {
                     if (isPlaying) {
                         playPauseButton.setImageResource(com.google.android.exoplayer2.R.drawable.exo_icon_pause)
@@ -51,6 +55,7 @@ class VideoActivity : AppCompatActivity() {
                         playPauseButton.setImageResource(com.google.android.exoplayer2.R.drawable.exo_icon_play)
                     }
                 }
+
                 override fun onPositionDiscontinuity(oldPosition: Player.PositionInfo, newPosition: Player.PositionInfo, reason: Int) {
                     super.onPositionDiscontinuity(oldPosition, newPosition, reason)
                     //disconnection problemi durumu
@@ -59,6 +64,8 @@ class VideoActivity : AppCompatActivity() {
             isBound = true
             VideoS?.initializePlayer()
         }
+
+
         override fun onServiceDisconnected(name: ComponentName?) {
             isBound = false
         }
@@ -68,14 +75,10 @@ class VideoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.video_page)
 
-
-        //NotificationReceiver.createNotificationChannels(this)
-
         playerView = findViewById(R.id.videoscreen)
         seekBar = findViewById(R.id.videbar)
         playPauseButton = findViewById(R.id.startbutton)
 
-        //initializePlayer()
 
         playPauseButton.setOnClickListener {
             if (isBound) {
@@ -86,45 +89,15 @@ class VideoActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-        setupSeekBar()
-
         val intent = Intent(this, VideoService::class.java)
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
-
-
-    private fun setupSeekBar() {
-        val player = ExoPlayerSingleton.getPlayer(this)
-
-        val updateSeekBar = object : Runnable {
-            override fun run() {
-                if (player.isPlaying) {
-                    seekBar.progress = player.currentPosition.toInt()
-                }
-                handler.postDelayed(this, 1000)
-            }
-        }
-        handler.post(updateSeekBar)
-
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    player.seekTo(progress.toLong())
-                }
-            }
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-    }
     override fun onDestroy() {
         super.onDestroy()
-        if(isBound){
+        if (isBound) {
             unbindService(serviceConnection)
-            isBound=false
+            isBound = false
         }
         ExoPlayerSingleton.releasePlayer()
         handler.removeCallbacksAndMessages(null)
