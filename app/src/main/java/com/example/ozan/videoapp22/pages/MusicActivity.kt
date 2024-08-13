@@ -66,7 +66,7 @@ class MusicActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.music_page)
 
-            NotificationReceiver.createNotificationChannels(this)
+          //  NotificationReceiver.createNotificationChannels(this)
 
             seekBar = findViewById(R.id.seekbarmusic)
             playPauseButton = findViewById(R.id.musicstop)

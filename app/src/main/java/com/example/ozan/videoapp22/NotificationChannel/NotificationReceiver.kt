@@ -40,6 +40,7 @@ class NotificationReceiver : BroadcastReceiver() {
                 }
 
                 val notificationManager = context.getSystemService(NotificationManager::class.java)
+
                 notificationManager.createNotificationChannel(musicChannel)
                 notificationManager.createNotificationChannel(videoChannel)
             }

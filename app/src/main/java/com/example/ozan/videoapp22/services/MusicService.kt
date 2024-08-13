@@ -85,7 +85,7 @@ return player
         player.prepare()
         player.playWhenReady = true
 
-        val intent = Intent(this, VideoService::class.java).apply {
+        val intent = Intent(this, MusicService::class.java).apply {
             action = if (player.isPlaying) {
                 NotificationReceiver.ACTION_PAUSE_MUSIC
 

@@ -6,20 +6,36 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.media.app.NotificationCompat.MediaStyle
 import com.example.ozan.videoapp22.NotificationChannel.ExoPlayerSingleton
 import com.example.ozan.videoapp22.NotificationChannel.NotificationReceiver
 import com.example.ozan.videoapp22.R
 import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.upstream.RawResourceDataSource
 
 class VideoService : Service() {
 
     private lateinit var player: ExoPlayer
+    private val binder = LocalBinder()
+
+    inner class LocalBinder : Binder() {
+        fun getService(): VideoService = this@VideoService
+    }
+    override fun onBind(intent: Intent?): IBinder? {
+        return binder
+    }
 
     companion object {
         const val NOTIFICATION_ID = 2
+    }
+
+    fun getPlayer():ExoPlayer{
+        return player
     }
 
     override fun onCreate() {
@@ -31,8 +47,8 @@ class VideoService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
-            NotificationReceiver.ACTION_PLAY_VIDEO -> playVideo()
-            NotificationReceiver.ACTION_PAUSE_VIDEO -> pauseVideo()
+            NotificationReceiver.ACTION_PLAY_VIDEO -> play()
+            NotificationReceiver.ACTION_PAUSE_VIDEO -> pause()
         }
         updateNotification()
         return START_STICKY
@@ -43,18 +59,39 @@ class VideoService : Service() {
         ExoPlayerSingleton.releasePlayer()
     }
 
-    override fun onBind(intent: Intent?): IBinder? = null
-
-    private fun playVideo() {
+    fun play() {
         if (!player.isPlaying) {
             player.play()
         }
     }
 
-    private fun pauseVideo() {
+    fun pause() {
         if (player.isPlaying) {
             player.pause()
         }
+    }
+
+    fun isPlaying(): Boolean {
+        return player.isPlaying
+    }
+
+    fun initializePlayer(){
+        player = ExoPlayerSingleton.getPlayer(this)
+        val rawUri = RawResourceDataSource.buildRawResourceUri(R.raw.nirnir)
+        val mediaItem = MediaItem.fromUri(rawUri)
+        player.setMediaItem(mediaItem)
+        player.prepare()
+        player.playWhenReady = true
+
+        val intent = Intent(this, VideoService::class.java).apply {
+            action = if (player.isPlaying) {
+                NotificationReceiver.ACTION_PAUSE_VIDEO
+
+            } else {
+                NotificationReceiver.ACTION_PLAY_VIDEO
+            }
+        }
+        ContextCompat.startForegroundService(this, intent)
     }
 
     private fun buildNotification(): Notification {
