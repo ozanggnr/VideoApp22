@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
 
         val fragment1: FragmentContainerView = findViewById(R.id.fragmentContainerView)
         val fragment2: FragmentContainerView = findViewById(R.id.fragmentContainerView2)
-        val fragment3: FragmentContainerView = findViewById(R.id.fragmentContainerView3)
 
         fragment1.setOnClickListener {
             val intent = Intent(this, MusicActivity::class.java)
@@ -28,9 +27,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        fragment3.setOnClickListener {
-            val intent = Intent(this, MusicActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
