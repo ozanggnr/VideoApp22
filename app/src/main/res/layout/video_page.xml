@@ -46,13 +46,41 @@
         app:layout_constraintVertical_bias="0.428"
         app:srcCompat="@android:drawable/ic_media_play" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="409dp"
-        android:layout_height="58dp"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/rwvideo"
+        android:layout_width="56dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="108dp"
+        android:clickable="true"
+        app:backgroundTint="@color/bg"
+        app:fabCustomSize="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.261"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@color/bg" />
+        app:srcCompat="@android:drawable/ic_media_rew" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ffvideo"
+        android:layout_width="56dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="108dp"
+        android:clickable="true"
+        app:backgroundTint="@color/bg"
+        app:fabCustomSize="43dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.713"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_media_ff" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="412dp"
+        android:layout_height="53dp"
+        android:background="@color/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

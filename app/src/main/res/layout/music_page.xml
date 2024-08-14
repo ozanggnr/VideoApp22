@@ -46,13 +46,41 @@
         app:layout_constraintVertical_bias="0.447"
         android:thumbTint="@color/bg"/>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="411dp"
-        android:layout_height="65dp"
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/rwmusic"
+        android:layout_width="56dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="236dp"
+        android:clickable="true"
+        app:backgroundTint="@color/bg"
+        app:fabCustomSize="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.283"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@color/bg" />
+        app:srcCompat="@android:drawable/ic_media_rew" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/ffmusic"
+        android:layout_width="56dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="240dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.712"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_media_ff"
+        app:fabCustomSize="43dp"
+        app:backgroundTint="@color/bg"/>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="412dp"
+        android:layout_height="53dp"
+        android:background="@color/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
