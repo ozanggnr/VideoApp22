@@ -21,19 +21,8 @@
         app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075" />
-
-    <TextView
-        android:id="@+id/nametag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
-        android:text="@string/hi_user"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.075"
+        />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -50,33 +39,58 @@
         <ImageView
             android:id="@+id/userlogo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/bg"
             android:src="@drawable/ic_launcher_foreground" />
+
     </androidx.cardview.widget.CardView>
 
-    <androidx.fragment.app.FragmentContainerView
+    <ImageView
         android:id="@+id/fragmentContainerView"
-        android:layout_width="411dp"
-        android:layout_height="208dp"
+        android:layout_width="363dp"
+        android:layout_height="186dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/random"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863" />
+        app:layout_constraintVertical_bias="0.888" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <ImageView
         android:id="@+id/fragmentContainerView2"
+        android:layout_width="295dp"
+        android:layout_height="191dp"
+        android:src="@drawable/bear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801" />
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="412dp"
-        android:layout_height="213dp"
+        android:layout_height="53dp"
         android:background="@color/bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/nametag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hi_user"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.839" />
+        app:layout_constraintVertical_bias="0.187" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
