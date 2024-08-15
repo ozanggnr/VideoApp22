@@ -7,15 +7,15 @@
     tools:context=".pages.MusicActivity">
 
     <ImageView
-        android:id="@+id/nirvanacover"
+        android:id="@+id/albumcover"
         android:layout_width="280dp"
         android:layout_height="267dp"
-        android:layout_marginBottom="424dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.381"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/nirvana" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.155" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/musicstop"
@@ -28,7 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nirvanacover"
         app:layout_constraintVertical_bias="1.0"
         android:src="@drawable/play_white"
         android:tint="@null" />
@@ -38,27 +37,25 @@
         android:id="@+id/seekbarmusic"
         android:layout_width="310dp"
         android:layout_height="23dp"
+        android:layout_marginBottom="44dp"
+        android:thumbTint="@color/bg"
         app:layout_constraintBottom_toTopOf="@+id/musicstop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nirvanacover"
-        app:layout_constraintVertical_bias="0.447"
-        android:thumbTint="@color/bg"/>
-
-
+        app:layout_constraintVertical_bias="0.447" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/rwmusic"
         android:layout_width="56dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="236dp"
+        android:layout_marginBottom="240dp"
         android:clickable="true"
         app:backgroundTint="@color/bg"
         app:fabCustomSize="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.283"
+        app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_media_rew" />
 

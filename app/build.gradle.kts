@@ -23,7 +23,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -43,20 +42,21 @@ android {
 }
 
 dependencies {
+    implementation ("com.google.firebase:firebase-storage:20.2.1")
+    implementation ("com.google.firebase:firebase-database:20.3.1") // For Realtime Database
+    implementation ("com.google.firebase:firebase-firestore:24.8.1")
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-perf")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.media:media:1.7.0")
     implementation("com.google.firebase:firebase-crashlytics")
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("androidx.core:core:1.13.1")
     implementation("com.google.android.material:material:1.12.0")
     implementation("com.google.android.exoplayer:exoplayer:2.19.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.activity:activity:1.9.1")
+    implementation("androidx.activity:activity-ktx:1.9.1")
     implementation("androidx.lifecycle:lifecycle-service:2.8.4")
     implementation("androidx.media3:media3-ui:1.4.0")
     testImplementation("junit:junit:4.13.2")
