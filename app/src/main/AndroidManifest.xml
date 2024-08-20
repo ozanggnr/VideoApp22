@@ -20,10 +20,10 @@
         >
 
         <activity
-            android:name=".pages.VideoActivity"
+            android:name=".Pages.VideoActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.MusicActivity"
+            android:name=".Pages.MusicActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -46,11 +46,11 @@
         </receiver>
 
         <service
-            android:name=".services.MusicService"
+            android:name=".Services.MusicService"
             android:exported="true"
             android:foregroundServiceType="mediaPlayback" />
         <service
-            android:name=".services.VideoService"
+            android:name=".Services.VideoService"
             android:exported="true"
             android:foregroundServiceType="mediaPlayback" />
     </application>

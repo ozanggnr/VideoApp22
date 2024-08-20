@@ -19,7 +19,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-
     buildFeatures {
         viewBinding = true
     }
@@ -42,9 +41,9 @@ android {
 }
 
 dependencies {
-    implementation ("com.google.firebase:firebase-storage:20.2.1")
-    implementation ("com.google.firebase:firebase-database:20.3.1") // For Realtime Database
-    implementation ("com.google.firebase:firebase-firestore:24.8.1")
+    implementation ("com.github.bumptech.glide:glide:4.6.1")
+    implementation ("com.google.firebase:firebase-database:21.0.0")
+    implementation ("com.google.firebase:firebase-firestore:25.0.0")
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-perf")
@@ -59,6 +58,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.9.1")
     implementation("androidx.lifecycle:lifecycle-service:2.8.4")
     implementation("androidx.media3:media3-ui:1.4.0")
+    implementation("com.google.firebase:firebase-storage:21.0.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
