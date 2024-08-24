@@ -6,45 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".Pages.MusicActivity">
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/musicstop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="180dp"
         android:clickable="true"
+        app:srcCompat="@android:drawable/ic_media_pause"
+        android:tint="@null"
         app:backgroundTint="@color/bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        android:src="@drawable/play_white"
-        android:tint="@null" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
     <SeekBar
         android:id="@+id/seekbarmusic"
         android:layout_width="310dp"
         android:layout_height="23dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="28dp"
         android:thumbTint="@color/bg"
         app:layout_constraintBottom_toTopOf="@+id/musicstop"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/rwmusic"
         android:layout_width="56dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="188dp"
         android:clickable="true"
         app:backgroundTint="@color/bg"
         app:fabCustomSize="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_media_rew" />
 
@@ -52,15 +52,16 @@
         android:id="@+id/ffmusic"
         android:layout_width="56dp"
         android:layout_height="43dp"
-        android:layout_marginBottom="240dp"
+        android:layout_marginBottom="188dp"
         android:clickable="true"
+        app:backgroundTint="@color/bg"
+        app:fabCustomSize="43dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.712"
+        app:layout_constraintHorizontal_bias="0.713"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_media_ff"
-        app:fabCustomSize="43dp"
-        app:backgroundTint="@color/bg"/>
+        app:srcCompat="@android:drawable/ic_media_ff" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="412dp"
@@ -72,11 +73,28 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylcer"
-        android:layout_width="345dp"
-        android:layout_height="281dp"
+        android:layout_width="412dp"
+        android:layout_height="301dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.09" />
+
+    <TextView
+        android:id="@+id/songname"
+        android:layout_width="398dp"
+        android:layout_height="54dp"
+        android:text="@string/nirvana_come_as_you_are"
+        android:textSize="20sp"
+        android:layout_marginStart="7dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.544" />
 </androidx.constraintlayout.widget.ConstraintLayout>

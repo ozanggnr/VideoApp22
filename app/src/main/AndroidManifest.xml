@@ -42,6 +42,8 @@
                 <action android:name="com.example.ozan.videoapp22.ACTION_PAUSE_VIDEO" />
                 <action android:name="com.example.ozan.videoapp22.ACTION_PLAY_MUSIC" />
                 <action android:name="com.example.ozan.videoapp22.ACTION_PAUSE_MUSIC" />
+                <action android:name="com.example.ozan.videoapp22.ACTION_NEXT_SONG" />
+                <action android:name="com.example.ozan.videoapp22.ACTION_PREVIOUS_SONG" />
             </intent-filter>
         </receiver>
 
